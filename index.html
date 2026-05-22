@@ -28,7 +28,7 @@
       padding: 30px;
       text-align: center;
       width: 90%;
-      max-width: 400px;
+      max-width: 420px;
     }
 
     h1 {
@@ -46,6 +46,33 @@
       border-radius: 12px;
       background: rgba(255, 255, 255, 0.08);
       font-size: 14px;
+    }
+
+    /* 🔥 Article cards */
+    .article {
+      display: block;
+      text-align: left;
+      padding: 14px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.05);
+      margin-bottom: 10px;
+      text-decoration: none;
+    }
+
+    .article-title {
+      color: #fff;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .article-desc {
+      color: #aaa;
+      font-size: 13px;
+      margin-top: 3px;
+    }
+
+    .article:hover {
+      background: rgba(255,255,255,0.1);
     }
 
     .back-btn {
@@ -76,11 +103,19 @@
     <h1>Skylark Support</h1>
     <p>Find help articles and guides for Skylark services.</p>
 
-   <div class="status">
-  <a href="wallpaper-unable-to-set.html">
-    Wallpaper was unable to set
-  </a>
-</div>
+    <div class="status">
+
+      <a class="article" href="https://skylark-inc.github.io/Support/WallpaperHelp/">
+        <div class="article-title">Wallpaper was unable to set</div>
+        <div class="article-desc">Fix issues when wallpapers fail to apply.</div>
+      </a>
+
+      <a class="article" href="https://skylark-inc.github.io/Support/EditionHelp/">
+        <div class="article-title">Why using your supported Edition is better</div>
+        <div class="article-desc">Learn why upgrading improves features, stability, and compatibility.</div>
+      </a>
+
+    </div>
 
     <button class="back-btn" onclick="history.back()">
       Go Back
