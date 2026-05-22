@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Skylark Obsolete - Skylark Support</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #0f1117;
+      color: white;
+      line-height: 1.6;
+    }
+
+    .page {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 22px;
+      padding: 28px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+    }
+
+    h1 {
+      margin-top: 0;
+      font-size: 28px;
+    }
+
+    h2 {
+      margin-top: 26px;
+      font-size: 20px;
+    }
+
+    p, li {
+      color: #dcdcdc;
+      font-size: 15px;
+    }
+
+    a {
+      color: #7cc7ff;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .notice {
+      background: rgba(255,255,255,0.08);
+      border-left: 4px solid #7cc7ff;
+      padding: 14px;
+      border-radius: 12px;
+      margin: 18px 0;
+    }
+
+    .warning {
+      background: rgba(255, 75, 75, 0.12);
+      border-left: 4px solid #ff6b6b;
+      padding: 14px;
+      border-radius: 12px;
+      margin: 18px 0;
+      color: #ffd6d6;
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 16px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.09);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: white;
+      color: black;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .back {
+      display: inline-block;
+      margin-top: 28px;
+      color: #aaa;
+      font-size: 13px;
+    }
+
+    footer {
+      margin-top: 30px;
+      font-size: 12px;
+      color: #777;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <section class="card">
+      <h1>Skylark Obsolete</h1>
+
+      <p>
+        Some older iOS and iPadOS versions may have trouble joining Skylark Servers.
+        This is mostly affecting older software versions where Dropbox no longer works
+        the same way it once did.
+      </p>
+
+      <div class="warning">
+        This is not fully controlled by Skylark. Some features depend on outside apps,
+        browsers, services, or shortcuts behavior. If those services stop supporting
+        older software, some Skylark features may stop working on those versions.
+      </div>
+
+      <h2>Current issue</h2>
+      <p>
+        iOS 14 and iOS 15 users may not be able to join Skylark Servers through the
+        Dropbox app. If the folder was added before Dropbox started cutting support,
+        the user may still be safe. However, new users may see an error code or the
+        Dropbox app may fail to load the folder.
+      </p>
+
+      <h2>What you can try first</h2>
+      <ol>
+        <li>Use Dropbox on the web to add the folder.</li>
+        <li>Use a computer if your device browser is not supported.</li>
+        <li>Use a newer device to add the folder, then log into Dropbox on the older device.</li>
+      </ol>
+
+      <h2>Your device result</h2>
+
+      <div class="result" id="deviceResult">
+        Checking your device software version...
+      </div>
+
+      <h2>Why this happens</h2>
+      <p>
+        Older software versions can slowly become unsupported by the tools Skylark
+        works with. Even if Skylark still wants to support those versions, some outside
+        services may no longer load, sync, or connect correctly.
+      </p>
+
+      <a class="back" href="https://skylark-inc.github.io/Support">
+        ← Back to Skylark Support
+      </a>
+    </section>
+
+    <footer>
+      © Skylark Inc
+    </footer>
+  </main>
+
+  <script>
+    const resultBox = document.getElementById("deviceResult");
+    const ua = navigator.userAgent;
+
+    function getIOSVersion() {
+      const match = ua.match(/OS (\d+)[._](\d+)(?:[._](\d+))?/);
+
+      if (!match) {
+        return null;
+      }
+
+      return {
+        major: parseInt(match[1], 10),
+        minor: parseInt(match[2] || "0", 10),
+        patch: parseInt(match[3] || "0", 10),
+        text: `${match[1]}.${match[2]}${match[3] ? "." + match[3] : ""}`
+      };
+    }
+
+    function versionAtLeast(version, major, minor, patch = 0) {
+      if (version.major > major) return true;
+      if (version.major < major) return false;
+      if (version.minor > minor) return true;
+      if (version.minor < minor) return false;
+      return version.patch >= patch;
+    }
+
+    function versionBetween(version, startMajor, startMinor, startPatch, endMajor, endMinor, endPatch) {
+      return (
+        versionAtLeast(version, startMajor, startMinor, startPatch) &&
+        !versionAtLeast(version, endMajor, endMinor, endPatch + 1)
+      );
+    }
+
+    const ios = getIOSVersion();
+
+    if (!ios) {
+      resultBox.innerHTML = `
+        <strong>Device version could not be detected.</strong>
+        <p>
+          If you are using an older iPhone or iPad and cannot join Skylark Servers,
+          try using Dropbox on the web, a computer, or a newer device to add the folder.
+        </p>
+      `;
+    }
+
+    else if (versionAtLeast(ios, 18, 0)) {
+      resultBox.innerHTML = `
+        <strong>Detected version: iOS/iPadOS ${ios.text}</strong>
+        <p>
+          This fix is not recommended for your device because iOS/iPadOS 18.0 and later
+          are not currently facing this issue.
+        </p>
+      `;
+    }
+
+    else if (
+      versionAtLeast(ios, 14, 3) &&
+      !versionAtLeast(ios, 14, 9)
+    ) {
+      resultBox.innerHTML = `
+        <strong>Detected version: iOS/iPadOS ${ios.text}</strong>
+        <p>
+          A new Edition may be available soon. In the meantime, you may modify your
+          existing copies. Skylark gives permission to modify your own copies for this issue.
+        </p>
+      `;
+    }
+
+    else if (
+      versionAtLeast(ios, 15, 0) &&
+      !versionAtLeast(ios, 18, 0)
+    ) {
+      resultBox.innerHTML = `
+        <strong>Detected version: iOS/iPadOS ${ios.text}</strong>
+        <p>
+          Your device may be affected by older software support limitations. If joining
+          Skylark Servers does not work, you can use Skylark Fe instead. Skylark Fe does
+          not use Skylark Servers.
+        </p>
+        <a class="button" href="https://endlesspete.github.io/Fe/">
+          Get Skylark Fe
+        </a>
+      `;
+    }
+
+    else {
+      resultBox.innerHTML = `
+        <strong>Detected version: iOS/iPadOS ${ios.text}</strong>
+        <p>
+          Your software version may be too old or outside the current recommended fix path.
+          Try using Dropbox on the web, a computer, or a newer device to add the folder.
+        </p>
+      `;
+    }
+  </script>
+</body>
+</html>
