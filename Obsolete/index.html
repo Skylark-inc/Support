@@ -3,9 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
 <title>Skylark Obsolete - Skylark Support</title>
-
 <style>
 :root {
   color-scheme: light dark;
@@ -17,8 +15,8 @@
   --accent: #007aff;
   --danger: #ff3b30;
   --warning: #ff9500;
+  --success: #34c759;
 }
-
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: #09090b;
@@ -29,13 +27,12 @@
     --accent: #6aa9ff;
     --danger: #ff6961;
     --warning: #ffd60a;
+    --success: #4cd964;
   }
 }
-
 * {
   box-sizing: border-box;
 }
-
 body {
   margin: 0;
   min-height: 100vh;
@@ -44,17 +41,21 @@ body {
     radial-gradient(circle at top, rgba(0,122,255,.16), transparent 42%),
     var(--bg);
   color: var(--text);
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", sans-serif;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "SF Pro Text",
+    "Segoe UI",
+    sans-serif;
   line-height: 1.6;
 }
-
 .page {
   width: 100%;
   max-width: 760px;
   margin: 0 auto;
   padding: 24px 0;
 }
-
 .card {
   background: var(--card);
   border: 1px solid var(--border);
@@ -64,7 +65,6 @@ body {
   -webkit-backdrop-filter: blur(24px);
   box-shadow: 0 18px 45px rgba(0,0,0,.16);
 }
-
 h1 {
   margin: 0;
   font-size: 2.2rem;
@@ -75,28 +75,27 @@ h1 {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-
 h2 {
   margin-top: 28px;
   font-size: 1.25rem;
   font-weight: 800;
 }
-
-p, li {
+p,
+li {
   color: var(--muted);
   font-size: .96rem;
 }
-
+strong {
+  color: var(--text);
+}
 a {
   color: var(--accent);
   font-weight: 700;
   text-decoration: none;
 }
-
 a:hover {
   text-decoration: underline;
 }
-
 .notice {
   margin-top: 16px;
   padding: 14px;
@@ -105,25 +104,26 @@ a:hover {
   font-weight: 650;
   line-height: 1.5;
 }
-
 .info {
   background: rgba(0,122,255,.1);
   border: 1px solid rgba(0,122,255,.22);
   color: var(--accent);
 }
-
 .warning {
   background: rgba(255,149,0,.12);
   border: 1px solid rgba(255,149,0,.28);
   color: var(--warning);
 }
-
 .danger {
   background: rgba(255,59,48,.12);
   border: 1px solid rgba(255,59,48,.28);
   color: var(--danger);
 }
-
+.success {
+  background: rgba(52,199,89,.12);
+  border: 1px solid rgba(52,199,89,.28);
+  color: var(--success);
+}
 .result {
   margin-top: 18px;
   padding: 18px;
@@ -131,17 +131,20 @@ a:hover {
   background: rgba(255,255,255,.08);
   border: 1px solid var(--border);
 }
-
 .result-title {
   font-size: 1.15rem;
   font-weight: 850;
   color: var(--text);
   margin-bottom: 8px;
 }
-
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
 .button {
   display: inline-block;
-  margin-top: 14px;
   padding: 12px 18px;
   border-radius: 999px;
   background: var(--accent);
@@ -149,13 +152,15 @@ a:hover {
   font-weight: 800;
   text-decoration: none;
 }
-
+.button:hover {
+  text-decoration: none;
+  filter: brightness(.96);
+}
 .button.secondary {
   background: transparent;
   border: 1px solid var(--border);
   color: var(--accent);
 }
-
 .back {
   display: inline-block;
   margin-top: 28px;
@@ -163,7 +168,6 @@ a:hover {
   font-size: .86rem;
   text-decoration: none;
 }
-
 .footer {
   margin-top: 26px;
   text-align: center;
@@ -172,330 +176,439 @@ a:hover {
 }
 </style>
 </head>
-
 <body>
 <main class="page">
   <section class="card">
     <h1>Skylark Obsolete</h1>
-
-    <p>
-      Skylark Obsolete covers issues caused by older software versions, unsupported
-      platforms, or outside services that no longer work correctly on older devices.
-    </p>
-
-    <div class="notice danger">
-      Some older devices may not be able to join Skylark Servers because Dropbox or
-      other services no longer behave the same way on older iOS and iPadOS versions.
-      This is not fully controlled by Skylark.
-    </div>
-
-    <h2>Current issue</h2>
-
-    <p>
-      Some iOS 14 and iOS 15 users may not be able to join Skylark Servers through
-      the Dropbox app. If the folder was added before Dropbox started cutting support,
-      the user may still be able to access it. New users may see an error code or
-      the Dropbox app may fail to load the folder.
-    </p>
-
-    <h2>General workaround</h2>
-
-    <ol>
-      <li>Try using Dropbox on the web to add the folder.</li>
-      <li>If your browser is unsupported, try using a computer.</li>
-      <li>Use a newer device to add the folder, then sign into Dropbox on the older device.</li>
-    </ol>
-
-    <h2>Your device result</h2>
-
-    <div class="result" id="deviceResult">
-      <div class="result-title">Checking your device...</div>
-      <p>Skylark is reading your software version.</p>
-    </div>
-
-    <div class="notice warning" id="betaNotice" style="display:none;">
-      This matched Edition appears to be in beta. Beta Editions may change, improve,
-      or behave differently while testing. For beta Editions, it is recommended to be
-      on the latest available Apple software beta when required.
-    </div>
-
-    <h2>Why this happens</h2>
-
-    <p>
-      Skylark may continue supporting an Edition, but the services Skylark works with
-      can change their own requirements. If a service stops supporting older software,
-      any feature that depends on it may stop working.
-    </p>
-
-    <a class="back" href="https://skylark-inc.github.io/Support">
-      ← Back to Skylark Support
-    </a>
+<p>
+  Skylark Obsolete covers compatibility problems caused by older software
+  versions, discontinued Editions, unsupported platforms, and outside services
+  that no longer work correctly on older devices.
+</p>
+<div class="notice danger">
+  Edition 1 has reached End of Life. Devices running iOS or iPadOS 14 can no
+  longer use the original Skylark server workaround.
+</div>
+<h2>Current issue</h2>
+<p>
+  Dropbox and other services have reduced or ended support for some older
+  software versions. This can prevent older devices from opening shared folders,
+  accepting invitations, or connecting to Skylark Servers.
+</p>
+<p>
+  These limitations are controlled by outside services and cannot always be
+  repaired by Skylark.
+</p>
+<h2>For iOS or iPadOS 15</h2>
+<p>
+  iOS and iPadOS 15 may still work, but support is becoming increasingly fragile.
+  Users on these versions should consider themselves on thin ice.
+</p>
+<ol>
+  <li>Try opening the Dropbox invitation through Dropbox on the web.</li>
+  <li>If the browser is unsupported, use a computer.</li>
+  <li>
+    Use a newer device to accept the folder invitation, then sign into the same
+    Dropbox account on the older device.
+  </li>
+</ol>
+<p>
+  If Skylark Servers still cannot be used, Skylark Fe may be used instead.
+  Skylark Fe does not rely on Skylark Servers.
+</p>
+<h2>Your device result</h2>
+<div class="result" id="deviceResult" aria-live="polite">
+  <div class="result-title">Checking your device...</div>
+  <p>Skylark is reading your software version.</p>
+</div>
+<div class="notice warning" id="betaNotice" hidden>
+  The Edition matched to this device is currently in beta. Beta Editions may
+  change or behave differently during testing. Some beta Editions may require
+  the device to be enrolled in Apple's beta software program.
+</div>
+<h2>Why this happens</h2>
+<p>
+  Skylark may continue supporting an Edition, but the apps and services it works
+  with can change their own requirements. When one of those services ends support
+  for an older system, dependent Skylark features may stop working as well.
+</p>
+<div class="notice info">
+  iOS and iPadOS 16 or later are currently considered safe from this specific
+  obsolete-server issue. This may change if outside services alter their
+  compatibility requirements.
+</div>
+<a class="back" href="https://skylark-inc.github.io/Support">
+  ← Back to Skylark Support
+</a>
   </section>
-
   <div class="footer">
     © Skylark Inc
   </div>
 </main>
-
 <script>
 const EDITIONS_URL = "/editions.json";
-const ua = navigator.userAgent;
-
+const SE_URL = "https://skylark-inc.github.io/SE";
+const FE_URL = "https://endlesspete.github.io/Fe/";
+const userAgent = navigator.userAgent;
 const resultBox = document.getElementById("deviceResult");
 const betaNotice = document.getElementById("betaNotice");
-
 const isIOSDevice =
-  /iPhone|iPad|iPod/.test(ua) ||
-  (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
-
+  /iPhone|iPad|iPod/.test(userAgent) ||
+  (
+    /Macintosh/.test(userAgent) &&
+    navigator.maxTouchPoints > 1
+  );
 const isMacOS =
-  /Macintosh/.test(ua) &&
+  /Macintosh/.test(userAgent) &&
   navigator.maxTouchPoints <= 1;
-
 const isBlockedPlatform =
-  /Android|Windows|Linux|CrOS/.test(ua) &&
-  !/iPhone|iPad|iPod/.test(ua);
-
+  /Android|Windows|Linux|CrOS/.test(userAgent) &&
+  !/iPhone|iPad|iPod/.test(userAgent);
 let iosVersion = null;
-
-const osMatch = ua.match(/OS (\d+)[._](\d+)(?:[._](\d+))?/);
-const versionMatch = ua.match(/Version\/(\d+)\.(\d+)/);
-
+const osMatch =
+  userAgent.match(/OS (\d+)[._](\d+)(?:[._](\d+))?/);
+const safariVersionMatch =
+  userAgent.match(/Version\/(\d+)\.(\d+)(?:\.(\d+))?/);
 if (osMatch) {
   iosVersion = {
     major: Number(osMatch[1]),
     minor: Number(osMatch[2]),
     patch: Number(osMatch[3] || 0),
-    text: `${osMatch[1]}.${osMatch[2]}${osMatch[3] ? "." + osMatch[3] : ""}`
+    text:
+      `${osMatch[1]}.${osMatch[2]}` +
+      `${osMatch[3] ? "." + osMatch[3] : ""}`
   };
 }
-
-/* iOS 26+ Safari reporting fix */
-if (versionMatch && iosVersion) {
-  const safariMajor = Number(versionMatch[1]);
-  const safariMinor = Number(versionMatch[2]);
-
+/*
+  Safari can sometimes report a legacy OS token while exposing a newer
+  Safari version. This keeps compatibility with newer iOS numbering.
+*/
+if (safariVersionMatch && iosVersion) {
+  const safariMajor = Number(safariVersionMatch[1]);
+  const safariMinor = Number(safariVersionMatch[2]);
+  const safariPatch = Number(safariVersionMatch[3] || 0);
   if (safariMajor >= 26 && iosVersion.major <= 18) {
     iosVersion = {
       major: safariMajor,
       minor: safariMinor,
-      patch: 0,
-      text: `${safariMajor}.${safariMinor}`
+      patch: safariPatch,
+      text:
+        `${safariMajor}.${safariMinor}` +
+        `${safariPatch ? "." + safariPatch : ""}`
     };
   }
 }
-
 function versionToParts(value) {
   const text = String(value || "")
-    .replace("iOS", "")
-    .replace("iPadOS", "")
+    .replace(/iOS/gi, "")
+    .replace(/iPadOS/gi, "")
     .trim();
-
   const parts = text.split(".");
-
   return {
     major: Number(parts[0] || 0),
     minor: Number(parts[1] || 0),
     patch: Number(parts[2] || 0)
   };
 }
-
-function compareVersions(a, b) {
-  if (a.major !== b.major) return a.major - b.major;
-  if (a.minor !== b.minor) return a.minor - b.minor;
-  return (a.patch || 0) - (b.patch || 0);
+function compareVersions(first, second) {
+  if (first.major !== second.major) {
+    return first.major - second.major;
+  }
+  if (first.minor !== second.minor) {
+    return first.minor - second.minor;
+  }
+  return (first.patch || 0) - (second.patch || 0);
 }
-
 function getValue(item, keys) {
   for (const key of keys) {
-    if (item && item[key] !== undefined && item[key] !== null) {
+    if (
+      item &&
+      item[key] !== undefined &&
+      item[key] !== null
+    ) {
       return item[key];
     }
   }
-
   return "";
 }
-
 function getEditionName(item) {
-  return getValue(item, ["edition", "name", "title"]) || "Skylark Edition";
+  return (
+    getValue(item, ["edition", "name", "title"]) ||
+    "Skylark Edition"
+  );
 }
-
 function getMinVersion(item) {
-  return versionToParts(getValue(item, ["min", "minimum", "minIOS", "minIos", "minVersion", "minimumIOS"]));
+  return versionToParts(
+    getValue(item, [
+      "min",
+      "minimum",
+      "minIOS",
+      "minIos",
+      "minVersion",
+      "minimumIOS"
+    ])
+  );
 }
-
 function getMaxVersion(item) {
-  return versionToParts(getValue(item, ["max", "maximum", "maxIOS", "maxIos", "maxVersion", "maximumIOS"]));
+  return versionToParts(
+    getValue(item, [
+      "max",
+      "maximum",
+      "maxIOS",
+      "maxIos",
+      "maxVersion",
+      "maximumIOS"
+    ])
+  );
 }
-
 function isBeta(item) {
-  const beta = getValue(item, ["beta", "Beta", "isBeta"]);
-  return beta === true || String(beta).toLowerCase() === "true";
+  const beta = getValue(item, [
+    "beta",
+    "Beta",
+    "isBeta"
+  ]);
+  return (
+    beta === true ||
+    String(beta).toLowerCase() === "true"
+  );
 }
-
 function setResult(title, body, type = "info", buttons = "") {
   resultBox.innerHTML = `
     <div class="result-title">${title}</div>
-    <div class="notice ${type}">${body}</div>
-    ${buttons}
+    <div class="notice ${type}">
+      ${body}
+    </div>
+    ${buttons ? `<div class="button-row">${buttons}</div>` : ""}
   `;
 }
-
 function makeButton(text, link, secondary = false) {
   return `
-    <a class="button ${secondary ? "secondary" : ""}" href="${link}">
+    <a
+      class="button ${secondary ? "secondary" : ""}"
+      href="${link}"
+    >
       ${text}
     </a>
   `;
 }
-
 async function getMatchedEdition() {
-  if (!iosVersion) return null;
-
+  if (!iosVersion) {
+    return null;
+  }
   try {
-    const response = await fetch(EDITIONS_URL, { cache: "no-store" });
-    if (!response.ok) return null;
-
+    const response = await fetch(
+      EDITIONS_URL,
+      { cache: "no-store" }
+    );
+    if (!response.ok) {
+      return null;
+    }
     const data = await response.json();
-    const editions = Array.isArray(data) ? data : data.editions;
-
-    if (!Array.isArray(editions)) return null;
-
+    const editions =
+      Array.isArray(data) ? data : data.editions;
+    if (!Array.isArray(editions)) {
+      return null;
+    }
     return editions.find(item => {
-      const min = getMinVersion(item);
-      const max = getMaxVersion(item);
-
+      const minimum = getMinVersion(item);
+      const maximum = getMaxVersion(item);
       return (
-        compareVersions(iosVersion, min) >= 0 &&
-        compareVersions(iosVersion, max) <= 0
+        compareVersions(iosVersion, minimum) >= 0 &&
+        compareVersions(iosVersion, maximum) <= 0
       );
-    });
+    }) || null;
   } catch (error) {
+    console.warn(
+      "Skylark could not load edition data:",
+      error
+    );
     return null;
   }
 }
-
 async function start() {
   if (isBlockedPlatform) {
     setResult(
       "Unsupported platform",
-      "Skylark is built for supported iPhone, iPad, and iPod touch devices. Android, Windows, Linux, and ChromeOS are not supported.",
+      `
+        Skylark is built for supported iPhone, iPad, and iPod touch devices.
+        Android, Windows, Linux, and ChromeOS are not supported.
+      `,
       "danger"
     );
     return;
   }
-
   if (isMacOS) {
     setResult(
       "macOS detected",
-      "Skylark is not officially supported on macOS. Some Shortcuts features may exist on Mac, but Skylark Editions are designed around iOS and iPadOS devices.",
+      `
+        Skylark is not officially supported on macOS. Skylark Editions are
+        designed for iOS and iPadOS, and this page cannot provide an Obsolete
+        recommendation for a Mac.
+      `,
       "warning"
     );
     return;
   }
-
   if (!isIOSDevice || !iosVersion) {
     setResult(
       "Device not detected",
-      "Skylark could not detect a supported iPhone, iPad, or iPod touch software version. Open this page in Safari on the device you want to check.",
+      `
+        Skylark could not identify a supported iPhone, iPad, or iPod touch
+        software version. Open this page in Safari on the device you want to check.
+      `,
       "warning"
     );
     return;
   }
-
   const matchedEdition = await getMatchedEdition();
-
   if (matchedEdition && isBeta(matchedEdition)) {
-    betaNotice.style.display = "block";
+    betaNotice.hidden = false;
   }
-
-  if (compareVersions(iosVersion, { major: 14, minor: 3, patch: 0 }) < 0) {
+  /*
+    iOS/iPadOS 14.2 and earlier:
+    Skylark does not run here.
+  */
+  if (
+    compareVersions(
+      iosVersion,
+      { major: 14, minor: 3, patch: 0 }
+    ) < 0
+  ) {
     setResult(
       `Detected iOS/iPadOS ${iosVersion.text}`,
-      "Your software version is too old. Skylark requires iOS/iPadOS 14.3 or later. There is no Dropbox workaround for this version because Skylark does not run here.",
+      `
+        This software version is too old to run Skylark. Skylark requires
+        iOS or iPadOS 14.3 or later.
+        <br><br>
+        There is no Dropbox workaround because Skylark itself cannot run
+        on this version.
+      `,
       "danger"
     );
     return;
   }
-
+  /*
+    iOS/iPadOS 14.3 through 14.8.1:
+    Edition 1 is EOL. Recommend Skylark SE.
+  */
   if (
-    compareVersions(iosVersion, { major: 14, minor: 3, patch: 0 }) >= 0 &&
-    compareVersions(iosVersion, { major: 14, minor: 8, patch: 1 }) <= 0
+    compareVersions(
+      iosVersion,
+      { major: 14, minor: 3, patch: 0 }
+    ) >= 0 &&
+    compareVersions(
+      iosVersion,
+      { major: 14, minor: 8, patch: 1 }
+    ) <= 0
   ) {
-    let editionText = "";
-
-    if (matchedEdition) {
-      editionText = `<p>Matched Edition: <strong>${getEditionName(matchedEdition)}</strong></p>`;
-    }
-
+    const editionText = matchedEdition
+      ? `
+        <p>
+          Matched Edition:
+          <strong>${getEditionName(matchedEdition)}</strong>
+        </p>
+      `
+      : "";
     setResult(
       `Detected iOS/iPadOS ${iosVersion.text}`,
       `
         ${editionText}
-        iOS/iPadOS 14.3 through 14.8.1 may not have a full Obsolete fix available yet.
-        You may modify your own copies for this issue. Skylark gives permission to modify
-        your own copies for compatibility purposes.
+        Edition 1 has reached End of Life. The original Dropbox and
+        Skylark Server workaround is no longer available for iOS or
+        iPadOS 14.
         <br><br>
-        Something small may be prepared for these devices later. For now, keep your copy safe.
+        Skylark SE is the replacement designed for these devices.
+        Visit the Skylark SE page for availability and additional information.
+        <br><br>
+        It is the end of an era. Goodbye, Edition 1.
       `,
-      "warning"
+      "danger",
+      makeButton(
+        "Learn about Skylark SE",
+        SE_URL
+      )
     );
     return;
   }
-
+  /*
+    iOS/iPadOS 15:
+    Still usable, but at risk.
+  */
   if (
-    compareVersions(iosVersion, { major: 15, minor: 0, patch: 0 }) >= 0 &&
-    compareVersions(iosVersion, { major: 18, minor: 0, patch: 0 }) < 0
+    iosVersion.major === 15
   ) {
-    let editionText = "";
-
-    if (matchedEdition) {
-      editionText = `<p>Matched Edition: <strong>${getEditionName(matchedEdition)}</strong></p>`;
-    }
-
+    const editionText = matchedEdition
+      ? `
+        <p>
+          Matched Edition:
+          <strong>${getEditionName(matchedEdition)}</strong>
+        </p>
+      `
+      : "";
     setResult(
       `Detected iOS/iPadOS ${iosVersion.text}`,
       `
         ${editionText}
-        Your device may be affected by Dropbox or older software support limitations.
-        First, try joining through Dropbox on the web. If that does not work, use a computer
-        or a newer device to add the folder, then sign into Dropbox again on this device.
+        Your device may still work with Skylark Servers, but iOS and
+        iPadOS 15 are now on thin ice.
         <br><br>
-        If Skylark Servers still do not work, you can use Skylark Fe. Skylark Fe does not use
-        Skylark Servers.
+        Dropbox and other outside services may reduce support without
+        notice. First, try accepting the Skylark folder invitation
+        through Dropbox on the web. If that fails, use a computer or a
+        newer device, then sign into the same Dropbox account here.
+        <br><br>
+        If Skylark Servers no longer work, Skylark Fe can be used instead.
+        Skylark Fe does not rely on Skylark Servers.
       `,
       "warning",
-      makeButton("Get Skylark Fe", "https://endlesspete.github.io/Fe/")
+      makeButton(
+        "Get Skylark Fe",
+        FE_URL
+      )
     );
     return;
   }
-
-  if (compareVersions(iosVersion, { major: 18, minor: 0, patch: 0 }) >= 0) {
-    let editionText = "";
-
-    if (matchedEdition) {
-      editionText = `<p>Matched Edition: <strong>${getEditionName(matchedEdition)}</strong></p>`;
-    }
-
+  /*
+    iOS/iPadOS 16 and later:
+    Safe from this issue for now.
+  */
+  if (
+    compareVersions(
+      iosVersion,
+      { major: 16, minor: 0, patch: 0 }
+    ) >= 0
+  ) {
+    const editionText = matchedEdition
+      ? `
+        <p>
+          Matched Edition:
+          <strong>${getEditionName(matchedEdition)}</strong>
+        </p>
+      `
+      : "";
     setResult(
       `Detected iOS/iPadOS ${iosVersion.text}`,
       `
         ${editionText}
-        iOS/iPadOS 18.0 and later are not currently recommended for this Obsolete fix
-        because they are not expected to be facing this issue at the moment.
+        Your software version is currently considered safe from this
+        specific Obsolete issue.
+        <br><br>
+        No alternate Edition or Dropbox workaround is recommended at
+        this time. Outside service requirements may change in the future.
       `,
-      "info"
+      "success"
     );
     return;
   }
-
   setResult(
     `Detected iOS/iPadOS ${iosVersion.text}`,
-    "Skylark could not determine a specific Obsolete recommendation for this version.",
+    `
+      Skylark could not determine a specific Obsolete recommendation
+      for this software version.
+    `,
     "warning"
   );
 }
-
 start();
 </script>
 </body>
