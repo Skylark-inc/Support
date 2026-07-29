@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Why does Skylark mark images as AI Generated or Assisted?</title>
+
+<link rel="icon" href="https://skylark-inc.github.io/favicon.ico">
+
+<style>
+:root{
+    color-scheme:light dark;
+
+    --bg:#f5f5f7;
+    --card:#ffffff;
+    --text:#1d1d1f;
+    --secondary:#6e6e73;
+    --border:#d2d2d7;
+    --blue:#0071e3;
+    --red:#ff3b30;
+}
+
+@media (prefers-color-scheme: dark){
+:root{
+    --bg:#000;
+    --card:#1c1c1e;
+    --text:#f5f5f7;
+    --secondary:#98989d;
+    --border:#3a3a3c;
+}
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;
+}
+
+body{
+background:var(--bg);
+color:var(--text);
+line-height:1.75;
+}
+
+.hero{
+padding:90px 20px 50px;
+text-align:center;
+max-width:900px;
+margin:auto;
+}
+
+.hero h1{
+font-size:clamp(2.3rem,5vw,4rem);
+font-weight:700;
+letter-spacing:-1px;
+margin-bottom:18px;
+}
+
+.hero p{
+font-size:1.2rem;
+color:var(--secondary);
+max-width:760px;
+margin:auto;
+}
+
+.container{
+max-width:950px;
+margin:auto;
+padding:25px 20px 70px;
+}
+
+.card{
+background:var(--card);
+border:1px solid var(--border);
+border-radius:26px;
+padding:35px;
+margin-bottom:28px;
+}
+
+.card h2{
+font-size:1.6rem;
+margin-bottom:15px;
+}
+
+.card p{
+color:var(--secondary);
+margin-bottom:18px;
+}
+
+.note{
+background:rgba(0,113,227,.08);
+border-left:4px solid var(--blue);
+padding:18px;
+border-radius:12px;
+margin-top:20px;
+}
+
+.warning{
+background:rgba(255,59,48,.08);
+border-left:4px solid var(--red);
+padding:18px;
+border-radius:12px;
+margin-top:20px;
+}
+
+.steps{
+display:grid;
+gap:18px;
+margin-top:20px;
+}
+
+.step{
+padding:20px;
+border:1px solid var(--border);
+border-radius:18px;
+}
+
+.step strong{
+display:block;
+font-size:1.1rem;
+margin-bottom:8px;
+}
+
+.button{
+display:inline-block;
+padding:14px 34px;
+background:var(--blue);
+color:white;
+text-decoration:none;
+border-radius:999px;
+font-weight:600;
+transition:.25s;
+}
+
+.button:hover{
+opacity:.9;
+}
+
+footer{
+text-align:center;
+padding:40px 20px;
+color:var(--secondary);
+font-size:.9rem;
+}
+</style>
+</head>
+
+<body>
+
+<section class="hero">
+<h1>Why does Skylark mark images as "AI Generated or Assisted"?</h1>
+
+<p>
+Artificial intelligence is making it easier than ever to create realistic images.
+Sometimes these images are obvious, while other times they can be difficult to distinguish from real photographs.
+To help provide context, Skylark allows users to mark images that were generated or assisted by AI.
+</p>
+</section>
+
+<div class="container">
+
+<div class="card">
+
+<h2>What does the label mean?</h2>
+
+<p>
+An image marked as <strong>"AI Generated or Assisted"</strong> simply tells you that artificial intelligence was involved in creating or modifying the image.
+</p>
+
+<p>
+It does <strong>not</strong> mean the image is harmful, fake, misleading, or against Skylark's rules. It is simply additional information so you can better understand what you're looking at.
+</p>
+
+<div class="note">
+The label exists to improve transparency, not to discourage creativity.
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Does Skylark scan my photos?</h2>
+
+<p>
+No.
+</p>
+
+<p>
+Skylark does <strong>not</strong> analyze, inspect, or scan the images you upload to determine whether they were created with AI. Your photos are not automatically checked.
+</p>
+
+<p>
+Instead, Skylark relies on the user to identify AI-assisted images.
+</p>
+
+<div class="warning">
+Because Skylark does not scan images, an image may appear without this label if the uploader chooses not to mark it.
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>How do I mark an AI image?</h2>
+
+<div class="steps">
+
+<div class="step">
+<strong>1. Rename the image</strong>
+Simply include <strong>"AI"</strong> somewhere in the image's filename.
+</div>
+
+<div class="step">
+<strong>2. Upload normally</strong>
+When Skylark detects "AI" in the filename, it can display the image as AI Generated or Assisted.
+</div>
+
+<div class="step">
+<strong>3. That's it</strong>
+No additional settings or options are required.
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>What should I do with this information?</h2>
+
+<p>
+Nothing, really.
+</p>
+
+<p>
+The label is simply there to help you stay informed. If you come across an incredible landscape, an unusual animal, or something that looks almost impossible, the label lets you know that AI may have played a role in creating it.
+</p>
+
+<p>
+Whether you enjoy AI artwork or prefer traditional photography, the choice is yours. Skylark does not block AI-generated images. The label is intended only to provide additional context and encourage users to view online images with healthy curiosity.
+</p>
+
+</div>
+
+<div style="text-align:center;margin-top:50px;">
+<a class="button" href="https://skylark-inc.github.io/">← Back to Home</a>
+</div>
+
+</div>
+
+<footer>
+© 2026 Skylark Inc. All rights reserved.
+</footer>
+
+</body>
+</html>
